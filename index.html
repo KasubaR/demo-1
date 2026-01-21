@@ -800,24 +800,80 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Logo styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-img {
+    width: 50px; /* Adjust based on your logo aspect ratio */
+    height: auto;
+    max-height: 50px;
+    object-fit: contain;
+}
+
+/* Adjust logo size for different screen sizes */
+@media (min-width: 768px) {
+    .logo-img {
+        width: 60px;
+        max-height: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo-img {
+        width: 70px;
+        max-height: 70px;
+    }
+}
+
+/* If your logo has specific dimensions (162x168), you might want to adjust: */
+/* For mobile, we'll scale it down proportionally */
+.logo-img.original-size {
+    width: 40px; /* Scale down for mobile */
+    height: 41px; /* Maintain aspect ratio (162:168 ≈ 40:41) */
+    object-fit: contain;
+}
+
+/* For tablet */
+@media (min-width: 768px) {
+    .logo-img.original-size {
+        width: 60px;
+        height: 62px;
+    }
+}
+
+/* For desktop */
+@media (min-width: 1024px) {
+    .logo-img.original-size {
+        width: 81px; /* Half of original */
+        height: 84px; /* Half of original */
+    }
+}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <!-- Mobile Navigation -->
-    <div class="mobile-header">
-        <div class="logo-container">
-            <!-- Logo placeholder - replace with your actual logo -->
-            <div class="logo-img" style="background: var(--gold); color: var(--black); display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 4px;">
-                HN
-            </div>
-            <div class="logo-text">HER<span>NAILS</span></div>
+<div class="mobile-header">
+    <div class="logo-container">
+        <!-- Logo image - replace with your actual logo -->
+        <img src="Her-nails-logo.png" alt="HER NAILS" class="logo-img" 
+             onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex';">
+        <!-- Fallback if image fails to load -->
+        <div class="logo-fallback" style="display: none; background: var(--gold); color: var(--black); width: 40px; height: 41px; align-items: center; justify-content: center; font-weight: bold; border-radius: 4px;">
+            HN
         </div>
-        <button class="mobile-menu-btn" id="menuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div class="logo-text">HER<span>NAILS</span></div>
     </div>
+    <button class="mobile-menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
 
     <div class="mobile-nav" id="mobileNav">
         <ul class="mobile-nav-links">
