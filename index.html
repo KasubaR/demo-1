@@ -3,454 +3,515 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxe Nails | Premium Nail Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HER NAILS | Luxury Nail Studio</title>
     <style>
         :root {
-            --primary: #8c7a6d;
-            --secondary: #b8a9a0;
-            --accent: #d4c5bc;
-            --light: #f8f5f2;
-            --dark: #5a524c;
-            --gold: #c8a97e;
+            --gold: #D4AF37;
+            --gold-light: #E6C158;
+            --gold-dark: #B8941F;
+            --black: #000000;
+            --black-light: #1A1A1A;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray: #333333;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
-            line-height: 1.7;
-            color: var(--dark);
-            background-color: var(--light);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray);
+            background: var(--white);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Minimalist Navigation */
-        nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 3rem;
+        /* Mobile-First Navigation */
+        .mobile-header {
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--black);
             z-index: 1000;
-            border-bottom: 1px solid rgba(140, 122, 109, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 0.75rem 1rem;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--primary);
-            letter-spacing: 2px;
-            text-decoration: none;
-            position: relative;
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.5rem;
         }
 
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--gold);
-            border-radius: 50%;
-            margin-top: 5px;
+        .logo-img {
+            width: 40px;
+            height: 41px;
+            object-fit: contain;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 3rem;
+        .logo-text {
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+        }
+
+        .logo-text span {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .mobile-menu-btn {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--black);
+            padding: 5rem 2rem 2rem;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
             list-style: none;
         }
 
-        .nav-links a {
-            color: var(--dark);
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--white);
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 400;
+            font-size: 1.2rem;
+            font-weight: 300;
             letter-spacing: 1px;
-            transition: color 0.3s ease;
-            position: relative;
             padding: 0.5rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
         }
 
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background: var(--gold);
-            transition: width 0.3s ease;
+        .mobile-nav-links a:hover {
+            color: var(--gold);
+            padding-left: 0.5rem;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        .mobile-nav-links a.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
         }
 
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-
-        /* Elegant Hero Section */
+        /* Hero Section - Mobile Optimized */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
+            padding: 6rem 1.5rem 4rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1607778496993-1a4d2e5c2a31?q=80&w=800&auto=format&fit=crop') center/cover no-repeat;
             display: flex;
             align-items: center;
-            justify-content: center;
             position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(248, 245, 242, 0.9) 0%, rgba(248, 245, 242, 0.7) 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23d4c5bc" stroke-width="0.5" opacity="0.3"/></svg>');
-            padding: 0 2rem;
         }
 
         .hero-content {
             text-align: center;
-            max-width: 800px;
-            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 2.5rem;
             font-weight: 300;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 1rem;
             line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            font-weight: 400;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--dark);
-            margin-bottom: 3rem;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 0.5px;
         }
 
         .hero-line {
-            width: 100px;
+            width: 60px;
             height: 2px;
             background: var(--gold);
             margin: 2rem auto;
         }
 
-        /* Modern Button */
+        /* Mobile-Friendly Button */
         .btn {
             display: inline-block;
-            padding: 1.2rem 3rem;
-            background: transparent;
-            color: var(--primary);
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--black);
             text-decoration: none;
-            border: 1px solid var(--primary);
+            border: none;
             font-size: 1rem;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            transition: left 0.3s ease;
-            z-index: -1;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            min-width: 200px;
         }
 
         .btn:hover {
-            color: var(--light);
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .btn:hover:before {
-            left: 0;
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            margin-left: 1rem;
         }
 
-        /* Services Section - Grid Layout */
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* Services Section - Mobile Grid */
         .services-section {
-            padding: 8rem 2rem;
-            background: var(--light);
+            padding: 4rem 1.5rem;
+            background: var(--white);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 3rem;
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 300;
-            color: var(--primary);
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            color: var(--dark);
-            font-size: 1.2rem;
-            font-weight: 300;
+            color: var(--black);
+            margin-bottom: 0.5rem;
             letter-spacing: 1px;
         }
 
-        /* Modern Service Cards */
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile Service Cards */
         .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .service-card {
-            background: white;
-            padding: 3rem;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
             position: relative;
-            transition: transform 0.3s ease;
-            border: none;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px var(--shadow);
             overflow: hidden;
         }
 
-        .service-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 1px solid rgba(140, 122, 109, 0.1);
-            pointer-events: none;
-        }
-
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         .service-number {
-            font-size: 5rem;
-            color: rgba(140, 122, 109, 0.05);
             position: absolute;
-            top: -1rem;
-            right: 2rem;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3.5rem;
+            color: rgba(212, 175, 55, 0.1);
             font-weight: 700;
             line-height: 1;
         }
 
         .service-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            color: var(--black);
+            margin-bottom: 1rem;
             font-weight: 400;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        .service-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 1px;
-            background: var(--gold);
+            letter-spacing: 0.5px;
+            padding-right: 4rem;
         }
 
         .price-tag {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             color: var(--gold);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             font-weight: 300;
-            letter-spacing: 1px;
+            display: block;
         }
 
         .service-features {
             list-style: none;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .service-features li {
-            padding: 0.8rem 0;
-            color: var(--dark);
+            padding: 0.5rem 0;
+            color: var(--gray);
             position: relative;
-            padding-left: 2rem;
-            font-size: 1.1rem;
+            padding-left: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .service-features li:before {
-            content: '—';
+            content: '•';
             position: absolute;
             left: 0;
             color: var(--gold);
+            font-size: 1.2rem;
         }
 
         .service-duration {
             display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--light);
-            color: var(--primary);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            border: 1px solid rgba(140, 122, 109, 0.2);
+            padding: 0.5rem 1.2rem;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
+            margin-top: 1rem;
         }
 
-        /* Booking Section */
+        /* Booking Section - Mobile Form */
         .booking-section {
-            padding: 8rem 2rem;
-            background: white;
+            padding: 4rem 1.5rem;
+            background: var(--gray-light);
         }
 
         .booking-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .booking-form {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
         }
 
         .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group.full-width {
-            grid-column: span 2;
+            margin-bottom: 0.5rem;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.8rem;
-            color: var(--primary);
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        .form-input {
+        .form-input,
+        .form-select,
+        .form-textarea {
             width: 100%;
             padding: 1rem;
-            border: 1px solid rgba(140, 122, 109, 0.2);
-            background: var(--light);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--dark);
-            transition: border-color 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--black);
+            border-radius: 8px;
+            transition: var(--transition);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
-        .form-input:focus {
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
             outline: none;
             border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
         }
 
-        select.form-input {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238c7a6d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 1rem center;
-            background-size: 1em;
+            background-size: 1rem;
         }
 
         .time-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .time-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .time-slot {
-            padding: 1rem;
+            padding: 0.8rem 0.5rem;
             text-align: center;
-            border: 1px solid rgba(140, 122, 109, 0.2);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--light);
+            transition: var(--transition);
+            background: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .time-slot:hover {
             border-color: var(--gold);
-            background: white;
         }
 
         .time-slot.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
         }
 
         /* Testimonials */
         .testimonials {
-            padding: 8rem 2rem;
-            background: var(--light);
+            padding: 4rem 1.5rem;
+            background: var(--white);
         }
 
         .testimonial-slider {
-            max-width: 800px;
-            margin: 4rem auto 0;
-            position: relative;
+            max-width: 600px;
+            margin: 2.5rem auto 0;
         }
 
         .testimonial {
             text-align: center;
-            padding: 4rem;
-            background: white;
+            padding: 2.5rem 2rem;
+            background: var(--gray-light);
+            border-radius: 12px;
             position: relative;
         }
 
         .testimonial-quote {
-            font-size: 1.8rem;
-            font-style: italic;
-            color: var(--dark);
-            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
             line-height: 1.6;
             font-weight: 300;
         }
 
         .testimonial-author {
-            color: var(--primary);
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+            color: var(--black);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: var(--light);
-            padding: 5rem 2rem;
+        .testimonial-author:before {
+            content: "— ";
+            color: var(--gold);
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Mobile Footer */
+        .mobile-footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem 1.5rem 2rem;
+        }
+
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .footer-section h3 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 1px;
         }
 
         .footer-links {
@@ -458,79 +519,254 @@
         }
 
         .footer-links li {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .footer-links a {
-            color: var(--accent);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 1.1rem;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            font-weight: 300;
         }
 
         .footer-links a:hover {
             color: var(--gold);
         }
 
-        .copyright {
-            text-align: center;
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(212, 197, 188, 0.2);
-            color: var(--accent);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+        .contact-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Booking Success Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal h3 {
+            font-size: 1.5rem;
+            color: var(--black);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .modal-close-btn {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 150px;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--gray);
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: pageFadeIn 0.4s ease;
+        }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 1rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            html {
+                font-size: 17px;
+            }
+
+            .mobile-header {
+                padding: 1rem 2rem;
+            }
+
+            .logo-img {
+                width: 45px;
+                height: 46px;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .hero {
+                padding: 8rem 2rem 6rem;
+            }
+
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
             }
 
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
 
             .booking-form {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .form-group.full-width {
-                grid-column: span 1;
+                grid-column: span 2;
             }
 
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
+            .time-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .back-to-top {
+                right: 2rem;
+                bottom: 2rem;
             }
         }
 
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
+                font-size: 3.5rem;
             }
         }
 
-        /* Animation */
+        /* Large Desktop Styles */
+        @media (min-width: 1200px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .services-section,
+            .booking-section,
+            .testimonials {
+                padding: 6rem 2rem;
+            }
+        }
+
+        /* Animation Classes */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
@@ -539,116 +775,134 @@
             transform: translateY(0);
         }
 
-        /* Page Transitions */
-        .page {
-            display: none;
-            animation: pageFadeIn 0.5s ease;
+        /* Loading State */
+        .loading {
+            position: relative;
+            pointer-events: none;
         }
 
-        @keyframes pageFadeIn {
-            from {
-                opacity: 0;
-            }
+        .loading:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
 
+        @keyframes spin {
             to {
-                opacity: 1;
+                transform: rotate(360deg);
             }
-        }
-
-        .page.active {
-            display: block;
         }
     </style>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo" onclick="showPage('home')">
-                LUXE NAILS
-                <span class="logo-dot"></span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#" onclick="showPage('home')">HOME</a></li>
-                <li><a href="#" onclick="showPage('services')">SERVICES</a></li>
-                <li><a href="#" onclick="showPage('booking')">BOOKING</a></li>
-            </ul>
+    <!-- Mobile Navigation -->
+    <div class="mobile-header">
+        <div class="logo-container">
+            <!-- Logo placeholder - replace with your actual logo -->
+            <div class="logo-img" style="background: var(--gold); color: var(--black); display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 4px;">
+                HN
+            </div>
+            <div class="logo-text">HER<span>NAILS</span></div>
         </div>
-    </nav>
+        <button class="mobile-menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="#" onclick="showPage('home')" class="active">HOME</a></li>
+            <li><a href="#" onclick="showPage('services')">SERVICES</a></li>
+            <li><a href="#" onclick="showPage('booking')">BOOKING</a></li>
+            <li><a href="tel:+2605551234567"><i class="fas fa-phone"></i> CALL NOW</a></li>
+            <li><a href="https://wa.me/2605551234567" target="_blank"><i class="fab fa-whatsapp"></i> WHATSAPP</a></li>
+        </ul>
+    </div>
+    <div class="mobile-nav-overlay" id="navOverlay"></div>
 
     <!-- HOME PAGE -->
     <div id="home" class="page active">
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-line"></div>
-                <h1>ELEGANCE IN EVERY DETAIL</h1>
-                <p class="hero-subtitle">A contemporary nail studio where luxury meets artistry</p>
+                <h1>ELEGANCE IN EVERY <span>DETAIL</span></h1>
+                <p class="hero-subtitle">Luxury nail artistry in the heart of Kitwe. Experience perfection with our premium black & gold signature services.</p>
                 <div class="hero-line"></div>
-                <a href="#" class="btn" onclick="showPage('booking')">RESERVE YOUR EXPERIENCE</a>
+                <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 2.5rem;">
+                    <a href="#" class="btn" onclick="showPage('booking')">BOOK NOW</a>
+                    <a href="tel:+2605551234567" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> CALL US
+                    </a>
+                </div>
             </div>
         </section>
 
         <section class="services-section">
             <div class="section-header">
-                <h2 class="section-title">CURATED EXPERIENCES</h2>
-                <p class="section-subtitle">Signature treatments designed for the modern woman</p>
+                <h2 class="section-title">SIGNATURE <span>SERVICES</span></h2>
+                <p class="section-subtitle">Premium nail care with our exclusive black & gold collection</p>
             </div>
             <div class="services-grid">
                 <div class="service-card fade-in">
                     <div class="service-number">01</div>
-                    <h3 class="service-title">Signature Manicure</h3>
-                    <div class="price-tag">K450</div>
+                    <h3 class="service-title">Classic Manicure</h3>
+                    <span class="price-tag">K45</span>
                     <ul class="service-features">
-                        <li>Precision shaping</li>
+                        <li>Precision nail shaping</li>
                         <li>Luxury cuticle care</li>
-                        <li>Extended hand massage</li>
+                        <li>Soothing hand massage</li>
                         <li>Premium polish selection</li>
+                    </ul>
+                    <span class="service-duration">45 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Gold Gel Perfection</h3>
+                    <span class="price-tag">K65</span>
+                    <ul class="service-features">
+                        <li>Long-wear gel application</li>
+                        <li>Nail strengthening treatment</li>
+                        <li>Gold accent options</li>
+                        <li>3-week durability</li>
                     </ul>
                     <span class="service-duration">60 MIN</span>
                 </div>
 
                 <div class="service-card fade-in">
-                    <div class="service-number">02</div>
-                    <h3 class="service-title">Luxe Gel Refinement</h3>
-                    <div class="price-tag">K65</div>
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Black Luxury Pedicure</h3>
+                    <span class="price-tag">K75</span>
                     <ul class="service-features">
-                        <li>Long-wear gel application</li>
-                        <li>Nail health treatment</li>
-                        <li>Chip-resistant finish</li>
-                        <li>Extended wear guarantee</li>
+                        <li>Aromatherapy foot soak</li>
+                        <li>Exfoliation treatment</li>
+                        <li>Extended leg massage</li>
+                        <li>Premium finish</li>
                     </ul>
                     <span class="service-duration">75 MIN</span>
-                </div>
-
-                <div class="service-card fade-in">
-                    <div class="service-number">03</div>
-                    <h3 class="service-title">Artisan Nail Design</h3>
-                    <div class="price-tag">K85+</div>
-                    <ul class="service-features">
-                        <li>Custom design consultation</li>
-                        <li>Hand-painted artistry</li>
-                        <li>Crystal embellishments</li>
-                        <li>Unique artistic expression</li>
-                    </ul>
-                    <span class="service-duration">90 MIN</span>
                 </div>
             </div>
         </section>
 
         <section class="testimonials">
             <div class="section-header">
-                <h2 class="section-title">CLIENT REFLECTIONS</h2>
-                <p class="section-subtitle">Experiences that speak for themselves</p>
+                <h2 class="section-title">CLIENT <span>LOVE</span></h2>
+                <p class="section-subtitle">What our amazing clients say about us</p>
             </div>
             <div class="testimonial-slider">
                 <div class="testimonial fade-in">
-                    <p class="testimonial-quote">"An oasis of calm and professionalism. Every visit feels like a retreat
-                        from the everyday."</p>
-                    <p class="testimonial-author">— ELEANOR R.</p>
+                    <p class="testimonial-quote">"Absolutely stunning work! The attention to detail is incredible. My nails looked perfect and lasted for weeks. Highly recommend!"</p>
+                    <p class="testimonial-author">SARAH M.</p>
                 </div>
             </div>
         </section>
@@ -656,86 +910,86 @@
 
     <!-- SERVICES PAGE -->
     <div id="services" class="page">
-        <section class="services-section" style="padding-top: 10rem;">
+        <section class="services-section" style="padding-top: 6rem;">
             <div class="section-header">
-                <h2 class="section-title">OUR COLLECTION</h2>
-                <p class="section-subtitle">Comprehensive nail care and artistry services</p>
+                <h2 class="section-title">FULL SERVICE <span>MENU</span></h2>
+                <p class="section-subtitle">Complete nail care and artistry services</p>
             </div>
             <div class="services-grid">
                 <div class="service-card fade-in">
                     <div class="service-number">01</div>
-                    <h3 class="service-title">Classic Refinement</h3>
-                    <div class="price-tag">K35</div>
+                    <h3 class="service-title">Classic Manicure</h3>
+                    <span class="price-tag">K45</span>
                     <ul class="service-features">
-                        <li>Essential nail shaping</li>
-                        <li>Gentle cuticle treatment</li>
-                        <li>Soothing hand massage</li>
-                        <li>Classic polish application</li>
+                        <li>Nail shaping & filing</li>
+                        <li>Cuticle care</li>
+                        <li>Hand massage</li>
+                        <li>Polish application</li>
                     </ul>
                     <span class="service-duration">45 MIN</span>
                 </div>
 
                 <div class="service-card fade-in">
                     <div class="service-number">02</div>
-                    <h3 class="service-title">Luxe Gel Perfection</h3>
-                    <div class="price-tag">K55</div>
+                    <h3 class="service-title">Gold Gel Manicure</h3>
+                    <span class="price-tag">K65</span>
                     <ul class="service-features">
-                        <li>Professional gel application</li>
-                        <li>Strengthening treatment</li>
-                        <li>Chip-resistant durability</li>
-                        <li>3-week wear guarantee</li>
+                        <li>Gel application</li>
+                        <li>Strengthening base</li>
+                        <li>Gold detail options</li>
+                        <li>3-week wear</li>
                     </ul>
                     <span class="service-duration">60 MIN</span>
                 </div>
 
                 <div class="service-card fade-in">
                     <div class="service-number">03</div>
-                    <h3 class="service-title">Spa Pedicure</h3>
-                    <div class="price-tag">K65</div>
+                    <h3 class="service-title">Luxury Pedicure</h3>
+                    <span class="price-tag">K75</span>
                     <ul class="service-features">
-                        <li>Aromatherapy foot soak</li>
-                        <li>Exfoliation treatment</li>
-                        <li>Extended leg massage</li>
-                        <li>Premium polish finish</li>
+                        <li>Foot soak & scrub</li>
+                        <li>Callus treatment</li>
+                        <li>Leg massage</li>
+                        <li>Polish finish</li>
                     </ul>
                     <span class="service-duration">75 MIN</span>
                 </div>
 
                 <div class="service-card fade-in">
                     <div class="service-number">04</div>
-                    <h3 class="service-title">Artistic Expression</h3>
-                    <div class="price-tag">K75+</div>
+                    <h3 class="service-title">Nail Art Design</h3>
+                    <span class="price-tag">K85+</span>
                     <ul class="service-features">
-                        <li>Custom design creation</li>
-                        <li>Hand-painted detail work</li>
-                        <li>Crystal application</li>
-                        <li>Unique artistic finish</li>
+                        <li>Custom design</li>
+                        <li>Hand-painted art</li>
+                        <li>Crystal accents</li>
+                        <li>Unique finishes</li>
                     </ul>
                     <span class="service-duration">90 MIN</span>
                 </div>
 
                 <div class="service-card fade-in">
                     <div class="service-number">05</div>
-                    <h3 class="service-title">Extension Elegance</h3>
-                    <div class="price-tag">K85</div>
+                    <h3 class="service-title">Nail Extensions</h3>
+                    <span class="price-tag">K95</span>
                     <ul class="service-features">
-                        <li>Custom length extension</li>
+                        <li>Custom length</li>
                         <li>Professional shaping</li>
-                        <li>Durable acrylic finish</li>
-                        <li>Post-care treatment</li>
+                        <li>Durable finish</li>
+                        <li>Aftercare treatment</li>
                     </ul>
                     <span class="service-duration">120 MIN</span>
                 </div>
 
                 <div class="service-card fade-in">
                     <div class="service-number">06</div>
-                    <h3 class="service-title">Ultimate Luxe Experience</h3>
-                    <div class="price-tag">K120</div>
+                    <h3 class="service-title">Ultimate Experience</h3>
+                    <span class="price-tag">K120</span>
                     <ul class="service-features">
-                        <li>Complete manicure & pedicure</li>
+                        <li>Full manicure & pedicure</li>
                         <li>Dual gel application</li>
-                        <li>Extended massage therapy</li>
-                        <li>Premium finishing treatments</li>
+                        <li>Extended massage</li>
+                        <li>Premium treatments</li>
                     </ul>
                     <span class="service-duration">150 MIN</span>
                 </div>
@@ -745,49 +999,49 @@
 
     <!-- BOOKING PAGE -->
     <div id="booking" class="page">
-        <section class="booking-section" style="padding-top: 10rem;">
+        <section class="booking-section" style="padding-top: 6rem;">
             <div class="booking-container">
                 <div class="section-header">
-                    <h2 class="section-title">RESERVE YOUR APPOINTMENT</h2>
-                    <p class="section-subtitle">Schedule your personalized nail experience</p>
+                    <h2 class="section-title">BOOK YOUR <span>APPOINTMENT</span></h2>
+                    <p class="section-subtitle">Schedule your luxury nail experience today</p>
                 </div>
 
                 <form id="bookingForm" class="booking-form">
                     <div class="form-group">
-                        <label class="form-label">FULL NAME</label>
-                        <input type="text" class="form-input" id="name" required>
+                        <label class="form-label">FULL NAME *</label>
+                        <input type="text" class="form-input" id="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">PHONE NUMBER *</label>
+                        <input type="tel" class="form-input" id="phone" required placeholder="+260 XXX XXX XXX">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">EMAIL ADDRESS</label>
-                        <input type="email" class="form-input" id="email" required>
+                        <input type="email" class="form-input" id="email" placeholder="your@email.com">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">PHONE NUMBER</label>
-                        <input type="tel" class="form-input" id="phone" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">SERVICE SELECTION</label>
-                        <select class="form-input" id="service" required>
-                            <option value="">SELECT A SERVICE</option>
-                            <option value="classic">Classic Refinement - K35</option>
-                            <option value="gel">Luxe Gel Perfection - K55</option>
-                            <option value="spa">Spa Pedicure - K65</option>
-                            <option value="art">Artistic Expression - K75+</option>
-                            <option value="extension">Extension Elegance - K85</option>
-                            <option value="ultimate">Ultimate Luxe Experience - K120</option>
+                        <label class="form-label">SERVICE *</label>
+                        <select class="form-select" id="service" required>
+                            <option value="">Choose a service</option>
+                            <option value="classic">Classic Manicure - K45</option>
+                            <option value="gel">Gold Gel Manicure - K65</option>
+                            <option value="pedicure">Luxury Pedicure - K75</option>
+                            <option value="art">Nail Art Design - K85+</option>
+                            <option value="extension">Nail Extensions - K95</option>
+                            <option value="ultimate">Ultimate Experience - K120</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">PREFERRED DATE</label>
+                        <label class="form-label">DATE *</label>
                         <input type="date" class="form-input" id="date" required>
                     </div>
 
-                    <div class="form-group full-width">
-                        <label class="form-label">PREFERRED TIME</label>
+                    <div class="form-group">
+                        <label class="form-label">TIME *</label>
                         <div class="time-grid" id="timeSlots">
                             <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
                             <div class="time-slot" onclick="selectTime(this)">10:30 AM</div>
@@ -802,19 +1056,13 @@
 
                     <div class="form-group full-width">
                         <label class="form-label">SPECIAL REQUESTS</label>
-                        <textarea class="form-input" id="notes" rows="4"
-                            placeholder="Any specific design preferences, allergies, or special requirements..."></textarea>
+                        <textarea class="form-textarea" id="notes" rows="3" placeholder="Any design ideas, allergies, or special requirements..."></textarea>
                     </div>
 
                     <div class="form-group full-width" style="text-align: center;">
-                        <button type="submit" class="btn"
-                            style="background: var(--primary); color: white; border: none; padding: 1.5rem 4rem;">
-                            CONFIRM RESERVATION
+                        <button type="submit" class="btn" id="submitBtn" style="min-width: 100%; padding: 1.2rem;">
+                            CONFIRM BOOKING
                         </button>
-                        <div id="successMessage"
-                            style="display: none; margin-top: 2rem; padding: 1.5rem; background: var(--light); color: var(--primary); text-align: center;">
-                            ✓ Reservation confirmed. You will receive a confirmation email shortly.
-                        </div>
                     </div>
                 </form>
             </div>
@@ -822,51 +1070,102 @@
     </div>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
+    <footer class="mobile-footer">
+        <div class="footer-grid">
             <div class="footer-section">
-                <h3>CONTACT</h3>
-                <ul class="footer-links">
-                    <li>📍 123 Luxury Lane, Kitwe</li>
-                    <li>📞 (555) 123-4567</li>
-                    <li>✉️ contact@luxenails.com</li>
-                </ul>
+                <h3>CONTACT US</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Lane, Kitwe</p>
+                    <p><i class="fas fa-phone"></i> +260 555 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> hello@hernails.com</p>
+                </div>
             </div>
 
             <div class="footer-section">
-                <h3>HOURS</h3>
-                <ul class="footer-links">
-                    <li>Monday - Friday: 9AM - 7PM</li>
-                    <li>Saturday: 10AM - 6PM</li>
-                    <li>Sunday: 11AM - 4PM</li>
-                </ul>
+                <h3>WORKING HOURS</h3>
+                <div class="contact-info">
+                    <p>Monday - Friday: 9AM - 7PM</p>
+                    <p>Saturday: 10AM - 6PM</p>
+                    <p>Sunday: 11AM - 4PM</p>
+                </div>
             </div>
 
             <div class="footer-section">
-                <h3>FOLLOW</h3>
+                <h3>CONNECT</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="copyright">
-            &copy; 2024 Luxe Nails. All rights reserved.
+            &copy; 2024 HER NAILS. All rights reserved.<br>
+            Luxury Nail Studio | Kitwe, Zambia
         </div>
     </footer>
 
-    <script>
-        let selectedTimeSlot = null;
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">✓</div>
+            <h3>Booking Confirmed!</h3>
+            <p>Thank you for choosing HER NAILS. You'll receive a confirmation SMS shortly. We look forward to seeing you!</p>
+            <button class="modal-close-btn" onclick="closeModal()">CLOSE</button>
+        </div>
+    </div>
 
-        // Page navigation
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Mobile Navigation
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlay = document.getElementById('navOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        navOverlay.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile nav on link click
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Page Navigation
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.classList.remove('active'));
+            pages.forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
-
+            
+            // Update active nav link
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.trim() === pageId.toUpperCase() || 
+                    (link.textContent.trim() === 'HOME' && pageId === 'home')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
             // Trigger animations
             setTimeout(() => {
                 const elements = document.querySelectorAll('.fade-in');
@@ -876,7 +1175,9 @@
             }, 100);
         }
 
-        // Time slot selection
+        // Time Slot Selection
+        let selectedTimeSlot = null;
+
         function selectTime(element) {
             if (selectedTimeSlot) {
                 selectedTimeSlot.classList.remove('selected');
@@ -886,56 +1187,102 @@
             document.getElementById('selectedTime').value = element.textContent;
         }
 
-        // Form submission
-        document.getElementById('bookingForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        // Form Submission
+        const bookingForm = document.getElementById('bookingForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successModal = document.getElementById('successModal');
 
+        bookingForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validate time slot
             if (!document.getElementById('selectedTime').value) {
-                alert('Please select a time slot for your reservation');
+                alert('Please select a time slot for your appointment');
                 return;
             }
-
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                date: document.getElementById('date').value,
-                time: document.getElementById('selectedTime').value,
-                notes: document.getElementById('notes').value
-            };
-
-            console.log('Reservation submitted:', formData);
-
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-
-            // Reset form
-            this.reset();
-            if (selectedTimeSlot) {
-                selectedTimeSlot.classList.remove('selected');
-                selectedTimeSlot = null;
-            }
-
-            // Hide success message after 5 seconds
+            
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = '';
+            
+            // Simulate form submission
             setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    service: document.getElementById('service').value,
+                    date: document.getElementById('date').value,
+                    time: document.getElementById('selectedTime').value,
+                    notes: document.getElementById('notes').value
+                };
+                
+                console.log('Booking submitted:', formData);
+                
+                // Reset loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'CONFIRM BOOKING';
+                
+                // Show success modal
+                successModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Reset form
+                bookingForm.reset();
+                if (selectedTimeSlot) {
+                    selectedTimeSlot.classList.remove('selected');
+                    selectedTimeSlot = null;
+                }
+                document.getElementById('selectedTime').value = '';
+                
+                // Set default date to tomorrow
+                setDefaultDate();
+            }, 1500);
         });
 
-        // Set minimum date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('date').setAttribute('min', today);
+        // Modal Functions
+        function closeModal() {
+            successModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
-        // Set default date to tomorrow
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
-        document.getElementById('date').value = tomorrowFormatted;
+        // Date Handling
+        function setDefaultDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            // Format as YYYY-MM-DD
+            const formattedDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('date').value = formattedDate;
+            
+            // Set min date to today
+            const todayFormatted = today.toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', todayFormatted);
+        }
 
-        // Scroll animations
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
+            // Scroll animations
+            handleScroll();
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll Animations
         function handleScroll() {
-            const elements = document.querySelectorAll('.fade-in');
+            const elements = document.querySelectorAll('.fade-in:not(.visible)');
             elements.forEach(el => {
                 const rect = el.getBoundingClientRect();
                 if (rect.top < window.innerHeight - 100) {
@@ -944,26 +1291,46 @@
             });
         }
 
-        // Initial fade in for home page
-        window.addEventListener('load', () => {
-            const elements = document.querySelectorAll('.fade-in');
-            elements.forEach(el => {
-                el.classList.add('visible');
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set default date
+            setDefaultDate();
+            
+            // Initialize animations
+            handleScroll();
+            
+            // Add click-outside listener for modal
+            successModal.addEventListener('click', (e) => {
+                if (e.target === successModal) {
+                    closeModal();
+                }
+            });
+            
+            // Add keyboard event listeners
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && successModal.classList.contains('active')) {
+                    closeModal();
+                }
             });
         });
 
-        // Nav scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.padding = '1rem 3rem';
-                nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.05)';
-            } else {
-                nav.style.padding = '1.5rem 3rem';
-                nav.style.boxShadow = 'none';
-            }
+        // Touch-friendly hover effects
+        document.addEventListener('touchstart', function() {}, {passive: true});
 
-            handleScroll();
+        // Prevent zoom on double-tap
+        document.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Service card touch feedback
+        document.querySelectorAll('.service-card, .time-slot').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
         });
     </script>
 </body>
