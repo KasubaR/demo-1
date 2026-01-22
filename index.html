@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LUKANDA | Beauty Center</title>
+    <style>
+        :root {
+            --primary: #C19261;
+            --primary-light: #D4A972;
+            --primary-dark: #A87C4F;
+            --secondary: #5A4B43;
+            --secondary-light: #6B5C54;
+            --secondary-dark: #4A3B33;
+            --black: #000000;
+            --black-light: #1A1A1A;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray: #333333;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Mobile-First Navigation */
+        .mobile-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--secondary);
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .mobile-menu-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--secondary);
+            padding: 5rem 2rem 2rem;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            padding: 0.5rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            padding-left: 0.5rem;
+        }
+
+        .mobile-nav-links a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Hero Section - Mobile Optimized */
+        .hero {
+            min-height: 100vh;
+            padding: 6rem 1.5rem 4rem;
+            background: linear-gradient(rgba(90, 75, 67, 0.85), rgba(90, 75, 67, 0.9)),
+                url('https://images.unsplash.com/photo-1607778496993-1a4d2e5c2a31?q=80&w=800&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-line {
+            width: 60px;
+            height: 2px;
+            background: var(--primary);
+            margin: 2rem auto;
+        }
+
+        /* Mobile-Friendly Button */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(193, 146, 97, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Services Section - Mobile Grid */
+        .services-section {
+            padding: 4rem 1.5rem;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px var(--shadow);
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 3.5rem;
+            color: rgba(193, 146, 97, 0.1);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            padding-right: 4rem;
+        }
+
+        .price-tag {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 1.5rem 0;
+            font-weight: 300;
+            display: block;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .service-features li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .service-duration {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
+            margin-top: 1rem;
+        }
+
+        /* Booking Section - Mobile Form */
+        .booking-section {
+            padding: 4rem 1.5rem;
+            background: var(--gray-light);
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .booking-form {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            border-radius: 8px;
+            transition: var(--transition);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(193, 146, 97, 0.1);
+        }
+
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235A4B43' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .time-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .time-slot {
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .time-slot:hover {
+            border-color: var(--primary);
+        }
+
+        .time-slot.selected {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 1.5rem;
+            background: var(--white);
+        }
+
+        .testimonial-slider {
+            max-width: 600px;
+            margin: 2.5rem auto 0;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--gray-light);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .testimonial-author:before {
+            content: "— ";
+            color: var(--primary);
+        }
+
+        /* Mobile Footer */
+        .mobile-footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 3rem 1.5rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .contact-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Booking Success Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .modal-close-btn {
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 150px;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--secondary-dark);
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: pageFadeIn 0.4s ease;
+        }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 1rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(193, 146, 97, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            html {
+                font-size: 17px;
+            }
+
+            .mobile-header {
+                padding: 1rem 2rem;
+            }
+
+            .logo-img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .hero {
+                padding: 8rem 2rem 6rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .booking-form {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-group.full-width {
+                grid-column: span 2;
+            }
+
+            .time-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .back-to-top {
+                right: 2rem;
+                bottom: 2rem;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Large Desktop Styles */
+        @media (min-width: 1200px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .services-section,
+            .booking-section,
+            .testimonials {
+                padding: 6rem 2rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading State */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 1rem;
+        }
+
+        .login-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-form {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-modal.active .login-form {
+            transform: translateY(0);
+        }
+
+        .login-form h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Mobile Navigation -->
+    <div class="mobile-header">
+        <div class="logo-container">
+            <!-- Logo image - replace with your actual logo.svg -->
+            <img src="logo.svg" alt="LUKANDA Beauty Center" class="logo-img"
+                onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='flex';">
+            <!-- Fallback if image fails to load -->
+            <div class="logo-fallback"
+                style="display: none; background: var(--primary); color: var(--white); width: 40px; height: 40px; align-items: center; justify-content: center; font-weight: bold; border-radius: 50%;">
+                LK
+            </div>
+            <div class="logo-text">LU<span>KANDA</span></div>
+        </div>
+        <div class="mobile-menu-container">
+            <a href="#" class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-user"></i> LOGIN
+            </a>
+            <button class="mobile-menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i> MENU
+            </button>
+        </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="#" onclick="showPage('home')" class="active">HOME</a></li>
+            <li><a href="#" onclick="showPage('services')">SERVICES</a></li>
+            <li><a href="#" onclick="showPage('booking')">BOOKING</a></li>
+            <li><a href="#" onclick="showLoginModal()"><i class="fas fa-user"></i> LOGIN / SIGN UP</a></li>
+            <li><a href="tel:+2605551234567"><i class="fas fa-phone"></i> CALL NOW</a></li>
+            <li><a href="https://wa.me/2605551234567" target="_blank"><i class="fab fa-whatsapp"></i> WHATSAPP</a></li>
+        </ul>
+    </div>
+    <div class="mobile-nav-overlay" id="navOverlay"></div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-form">
+            <h3>Welcome to Lukanda</h3>
+            <input type="email" placeholder="Email Address" id="loginEmail">
+            <input type="password" placeholder="Password" id="loginPassword">
+            <button class="btn" onclick="handleLogin()" style="width: 100%; margin-bottom: 1rem;">LOGIN</button>
+            <p style="text-align: center; font-size: 0.9rem; color: var(--gray);">
+                Don't have an account? <a href="#" onclick="showSignup()" style="color: var(--primary);">Sign up</a>
+            </p>
+            <button class="modal-close-btn" onclick="closeLoginModal()"
+                style="width: 100%; margin-top: 1rem;">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-line"></div>
+                <h1>BEAUTY IN EVERY <span>DETAIL</span></h1>
+                <p class="hero-subtitle">Luxury beauty services in the heart of Kitwe. Experience perfection with our
+                    premium Lukanda signature treatments.</p>
+                <div class="hero-line"></div>
+                <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 2.5rem;">
+                    <a href="#" class="btn" onclick="showPage('booking')">BOOK NOW</a>
+                    <a href="tel:+2605551234567" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> CALL US
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="section-header">
+                <h2 class="section-title">SIGNATURE <span>SERVICES</span></h2>
+                <p class="section-subtitle">Premium beauty care with our exclusive Lukanda collection</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-number">01</div>
+                    <h3 class="service-title">Classic Manicure</h3>
+                    <span class="price-tag">K45</span>
+                    <ul class="service-features">
+                        <li>Precision nail shaping</li>
+                        <li>Luxury cuticle care</li>
+                        <li>Soothing hand massage</li>
+                        <li>Premium polish selection</li>
+                    </ul>
+                    <span class="service-duration">45 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Deluxe Gel Perfection</h3>
+                    <span class="price-tag">K65</span>
+                    <ul class="service-features">
+                        <li>Long-wear gel application</li>
+                        <li>Nail strengthening treatment</li>
+                        <li>Design accent options</li>
+                        <li>3-week durability</li>
+                    </ul>
+                    <span class="service-duration">60 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Luxury Pedicure</h3>
+                    <span class="price-tag">K75</span>
+                    <ul class="service-features">
+                        <li>Aromatherapy foot soak</li>
+                        <li>Exfoliation treatment</li>
+                        <li>Extended leg massage</li>
+                        <li>Premium finish</li>
+                    </ul>
+                    <span class="service-duration">75 MIN</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="section-header">
+                <h2 class="section-title">CLIENT <span>LOVE</span></h2>
+                <p class="section-subtitle">What our amazing clients say about us</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial fade-in">
+                    <p class="testimonial-quote">"Absolutely stunning work! The attention to detail is incredible. My
+                        nails looked perfect and lasted for weeks. The Lukanda experience is truly exceptional!"</p>
+                    <p class="testimonial-author">SARAH M.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <section class="services-section" style="padding-top: 6rem;">
+            <div class="section-header">
+                <h2 class="section-title">FULL SERVICE <span>MENU</span></h2>
+                <p class="section-subtitle">Complete beauty care and artistry services at Lukanda</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-number">01</div>
+                    <h3 class="service-title">Classic Manicure</h3>
+                    <span class="price-tag">K45</span>
+                    <ul class="service-features">
+                        <li>Nail shaping & filing</li>
+                        <li>Cuticle care</li>
+                        <li>Hand massage</li>
+                        <li>Polish application</li>
+                    </ul>
+                    <span class="service-duration">45 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Deluxe Gel Manicure</h3>
+                    <span class="price-tag">K65</span>
+                    <ul class="service-features">
+                        <li>Gel application</li>
+                        <li>Strengthening base</li>
+                        <li>Design detail options</li>
+                        <li>3-week wear</li>
+                    </ul>
+                    <span class="service-duration">60 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Luxury Pedicure</h3>
+                    <span class="price-tag">K75</span>
+                    <ul class="service-features">
+                        <li>Foot soak & scrub</li>
+                        <li>Callus treatment</li>
+                        <li>Leg massage</li>
+                        <li>Polish finish</li>
+                    </ul>
+                    <span class="service-duration">75 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">04</div>
+                    <h3 class="service-title">Nail Art Design</h3>
+                    <span class="price-tag">K85+</span>
+                    <ul class="service-features">
+                        <li>Custom design</li>
+                        <li>Hand-painted art</li>
+                        <li>Crystal accents</li>
+                        <li>Unique finishes</li>
+                    </ul>
+                    <span class="service-duration">90 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">05</div>
+                    <h3 class="service-title">Nail Extensions</h3>
+                    <span class="price-tag">K95</span>
+                    <ul class="service-features">
+                        <li>Custom length</li>
+                        <li>Professional shaping</li>
+                        <li>Durable finish</li>
+                        <li>Aftercare treatment</li>
+                    </ul>
+                    <span class="service-duration">120 MIN</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-number">06</div>
+                    <h3 class="service-title">Ultimate Experience</h3>
+                    <span class="price-tag">K120</span>
+                    <ul class="service-features">
+                        <li>Full manicure & pedicure</li>
+                        <li>Dual gel application</li>
+                        <li>Extended massage</li>
+                        <li>Premium treatments</li>
+                    </ul>
+                    <span class="service-duration">150 MIN</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- BOOKING PAGE -->
+    <div id="booking" class="page">
+        <section class="booking-section" style="padding-top: 6rem;">
+            <div class="booking-container">
+                <div class="section-header">
+                    <h2 class="section-title">BOOK YOUR <span>APPOINTMENT</span></h2>
+                    <p class="section-subtitle">Schedule your luxury Lukanda experience today</p>
+                </div>
+
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label class="form-label">FULL NAME *</label>
+                        <input type="text" class="form-input" id="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">PHONE NUMBER *</label>
+                        <input type="tel" class="form-input" id="phone" required placeholder="+260 XXX XXX XXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">EMAIL ADDRESS</label>
+                        <input type="email" class="form-input" id="email" placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">SERVICE *</label>
+                        <select class="form-select" id="service" required>
+                            <option value="">Choose a service</option>
+                            <option value="classic">Classic Manicure - K45</option>
+                            <option value="gel">Deluxe Gel Manicure - K65</option>
+                            <option value="pedicure">Luxury Pedicure - K75</option>
+                            <option value="art">Nail Art Design - K85+</option>
+                            <option value="extension">Nail Extensions - K95</option>
+                            <option value="ultimate">Ultimate Experience - K120</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">DATE *</label>
+                        <input type="date" class="form-input" id="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">TIME *</label>
+                        <div class="time-grid" id="timeSlots">
+                            <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
+                            <div class="time-slot" onclick="selectTime(this)">10:30 AM</div>
+                            <div class="time-slot" onclick="selectTime(this)">12:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">1:30 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">3:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">4:30 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">6:00 PM</div>
+                        </div>
+                        <input type="hidden" id="selectedTime" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label">SPECIAL REQUESTS</label>
+                        <textarea class="form-textarea" id="notes" rows="3"
+                            placeholder="Any design ideas, allergies, or special requirements..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width" style="text-align: center;">
+                        <button type="submit" class="btn" id="submitBtn" style="min-width: 100%; padding: 1.2rem;">
+                            CONFIRM BOOKING
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mobile-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>CONTACT US</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Beauty Lane, Kitwe</p>
+                    <p><i class="fas fa-phone"></i> +260 555 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> hello@lukanda.com</p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>WORKING HOURS</h3>
+                <div class="contact-info">
+                    <p>Monday - Friday: 9AM - 7PM</p>
+                    <p>Saturday: 10AM - 6PM</p>
+                    <p>Sunday: 11AM - 4PM</p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONNECT</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2024 LUKANDA BEAUTY CENTER. All rights reserved.<br>
+            Luxury Beauty Services | Kitwe, Zambia
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">✓</div>
+            <h3>Booking Confirmed!</h3>
+            <p>Thank you for choosing LUKANDA. You'll receive a confirmation SMS shortly. We look forward to seeing you!
+            </p>
+            <button class="modal-close-btn" onclick="closeModal()">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Mobile Navigation
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlay = document.getElementById('navOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        navOverlay.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile nav on link click
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Page Navigation
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            // Update active nav link
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.trim() === pageId.toUpperCase() ||
+                    (link.textContent.trim() === 'HOME' && pageId === 'home')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Trigger animations
+            setTimeout(() => {
+                const elements = document.querySelectorAll('.fade-in');
+                elements.forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 100);
+        }
+
+        // Time Slot Selection
+        let selectedTimeSlot = null;
+
+        function selectTime(element) {
+            if (selectedTimeSlot) {
+                selectedTimeSlot.classList.remove('selected');
+            }
+            element.classList.add('selected');
+            selectedTimeSlot = element;
+            document.getElementById('selectedTime').value = element.textContent;
+        }
+
+        // Form Submission
+        const bookingForm = document.getElementById('bookingForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successModal = document.getElementById('successModal');
+
+        bookingForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Validate time slot
+            if (!document.getElementById('selectedTime').value) {
+                alert('Please select a time slot for your appointment');
+                return;
+            }
+
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = '';
+
+            // Simulate form submission
+            setTimeout(() => {
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    service: document.getElementById('service').value,
+                    date: document.getElementById('date').value,
+                    time: document.getElementById('selectedTime').value,
+                    notes: document.getElementById('notes').value
+                };
+
+                console.log('Booking submitted:', formData);
+
+                // Reset loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'CONFIRM BOOKING';
+
+                // Show success modal
+                successModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Reset form
+                bookingForm.reset();
+                if (selectedTimeSlot) {
+                    selectedTimeSlot.classList.remove('selected');
+                    selectedTimeSlot = null;
+                }
+                document.getElementById('selectedTime').value = '';
+
+                // Set default date to tomorrow
+                setDefaultDate();
+            }, 1500);
+        });
+
+        // Modal Functions
+        function closeModal() {
+            successModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Login Modal Functions
+        const loginModal = document.getElementById('loginModal');
+
+        function showLoginModal() {
+            loginModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Close mobile nav if open
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+        }
+
+        function closeLoginModal() {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simple validation
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            // Simulate login (in a real app, this would be an API call)
+            console.log('Login attempt:', email);
+            alert('Login successful! (This is a demo)');
+            closeLoginModal();
+        }
+
+        function showSignup() {
+            alert('Sign up form would appear here. For this demo, use any email/password.');
+        }
+
+        // Date Handling
+        function setDefaultDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            // Format as YYYY-MM-DD
+            const formattedDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('date').value = formattedDate;
+
+            // Set min date to today
+            const todayFormatted = today.toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', todayFormatted);
+        }
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            // Scroll animations
+            handleScroll();
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll Animations
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in:not(.visible)');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set default date
+            setDefaultDate();
+
+            // Initialize animations
+            handleScroll();
+
+            // Add click-outside listeners for modals
+            successModal.addEventListener('click', (e) => {
+                if (e.target === successModal) {
+                    closeModal();
+                }
+            });
+
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    closeLoginModal();
+                }
+            });
+
+            // Add keyboard event listeners
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (successModal.classList.contains('active')) {
+                        closeModal();
+                    }
+                    if (loginModal.classList.contains('active')) {
+                        closeLoginModal();
+                    }
+                }
+            });
+        });
+
+        // Touch-friendly hover effects
+        document.addEventListener('touchstart', function () { }, { passive: true });
+
+        // Prevent zoom on double-tap
+        document.addEventListener('dblclick', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Service card touch feedback
+        document.querySelectorAll('.service-card, .time-slot').forEach(element => {
+            element.addEventListener('touchstart', function () {
+                this.style.transform = 'scale(0.98)';
+            });
+
+            element.addEventListener('touchend', function () {
+                this.style.transform = '';
+            });
+        });
+    </script>
+</body>
+
+</html>
